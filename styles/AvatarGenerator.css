@@ -1,0 +1,11 @@
+.avatar-container{
+    position: relative;
+    width: 440px;
+    height: 440px;
+}
+
+.avatar-component{
+    position: absolute;
+    width: 100%;
+    height: auto;
+}
