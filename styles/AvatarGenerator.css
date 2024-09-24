@@ -2,10 +2,22 @@
     position: relative;
     width: 440px;
     height: 440px;
+    overflow: hidden;
 }
 
 .avatar-component{
     position: absolute;
-    width: 100%;
+    width: auto;
     height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pet-component{
+    position: absolute;
+    width: 290;
+    height: 84;
+    rotate: -20deg;
+    left: -60px;
+    top:150px;
 }

@@ -46,6 +46,15 @@ const components = {
     'smooth.svg',
     'styled.svg',
   ],
+  //   backgrounds: ['solid.svg'],
+  //   bodies: ['necklace.svg'],
+  //   eyebrows: ['round.svg'],
+  //   eyes: ['lashes.svg'],
+  //   glasses: ['plain.svg'],
+  //   head: ['head.svg'],
+  //   mouths: ['lips.svg'],
+  //   pets: ['fish.svg'],
+  //   tops: ['ponytail.svg'],
 }
 
 const getRandomComponent = (type: keyof typeof components) => {
@@ -82,16 +91,34 @@ const AvatarGenerator = () => {
           alt="background"
         />
         <img
+          src={`/src/files/head/${getRandomComponent('head')}`}
+          className="avatar-component"
+          style={{ top: '125px' }}
+          alt="head"
+        />
+        <img
           src={`/src/files/bodies/${getRandomComponent('bodies')}`}
           className="avatar-component"
           style={{ top: '297px' }}
           alt="body"
         />
         <img
-          src={`/src/files/head/${getRandomComponent('head')}`}
+          src={`/src/files/glasses/${getRandomComponent('glasses')}`}
           className="avatar-component"
-          style={{ top: '48px' }}
-          alt="head"
+          style={{ top: '194px' }}
+          alt="glasses"
+        />
+        <img
+          src={`/src/files/mouths/${getRandomComponent('mouths')}`}
+          className="avatar-component"
+          style={{ top: '225px' }}
+          alt="mouth"
+        />
+        <img
+          src={`/src/files/tops/${getRandomComponent('tops')}`}
+          className="avatar-component"
+          style={{ top: '58px' }}
+          alt="top"
         />
         <img
           src={`/src/files/eyes/${getRandomComponent('eyes')}`}
@@ -103,31 +130,13 @@ const AvatarGenerator = () => {
           src={`/src/files/eyebrows/${getRandomComponent('eyebrows')}`}
           className="avatar-component"
           style={{ top: '176px' }}
-          alt="eyes"
-        />
-        <img
-          src={`/src/files/mouths/${getRandomComponent('mouths')}`}
-          className="avatar-component"
-          style={{ top: '275px' }}
-          alt="mouth"
-        />
-        <img
-          src={`/src/files/tops/${getRandomComponent('tops')}`}
-          className="avatar-component"
-          style={{ top: '58px' }}
-          alt="top"
-        />
-        <img
-          src={`/src/files/glasses/${getRandomComponent('glasses')}`}
-          className="avatar-component"
-          style={{ top: '194px' }}
-          alt="glasses"
+          alt="eyebrows"
         />
         <img
           src={`/src/files/pets/${getRandomComponent('pets')}`}
-          className="avatar-component"
-          style={{ top: '350px' }}
+          className="pet-component"
           alt="pet"
+          style={{ top: '312px' }}
         />
       </div>
       <button onClick={generateAvatar}>Сгенерировать аватарку</button>
