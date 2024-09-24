@@ -135,56 +135,56 @@ const AvatarGenerator = () => {
           />
         ) : (
           <img
-            src={`/src/files/backgrounds/${avatarComponents.background}`}
+            src={`./backgrounds/${avatarComponents.background}`}
             className="avatar-component"
             style={{ top: '0px' }}
             alt="background"
           />
         )}
         <img
-          src={`/src/files/head/${avatarComponents.head}`}
+          src={`./head/${avatarComponents.head}`}
           className="avatar-component"
           style={{ top: '132px' }}
           alt="head"
         />
         <img
-          src={`/src/files/eyebrows/${avatarComponents.eyebrows}`}
+          src={`./eyebrows/${avatarComponents.eyebrows}`}
           className="avatar-component"
           style={{ top: '176px' }}
           alt="eyebrows"
         />
         <img
-          src={`/src/files/bodies/${avatarComponents.body}`}
+          src={`./bodies/${avatarComponents.body}`}
           className="avatar-component"
           style={{ top: '297px' }}
           alt="body"
         />
         <img
-          src={`/src/files/mouths/${avatarComponents.mouth}`}
+          src={`./mouths/${avatarComponents.mouth}`}
           className="avatar-component"
           style={{ top: getMouthPosition(avatarComponents.mouth) }}
           alt="mouth"
         />
         <img
-          src={`/src/files/glasses/${avatarComponents.glasses}`}
+          src={`./glasses/${avatarComponents.glasses}`}
           className="avatar-component"
           style={{ top: '194px' }}
           alt="glasses"
         />
         <img
-          src={`/src/files/tops/${avatarComponents.top}`}
+          src={`./tops/${avatarComponents.top}`}
           className="avatar-component"
           style={{ top: '62px' }}
           alt="top"
         />
         <img
-          src={`/src/files/eyes/${avatarComponents.eyes}`}
+          src={`./eyes/${avatarComponents.eyes}`}
           className="avatar-component"
           style={{ top: '200px' }}
           alt="eyes"
         />
         <img
-          src={`/src/files/pets/${avatarComponents.pet}`}
+          src={`./pets/${avatarComponents.pet}`}
           className="pet-component"
           alt="pet"
           style={{ top: '312px' }}
