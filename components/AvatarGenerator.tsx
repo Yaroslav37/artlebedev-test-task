@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { toPng } from 'html-to-image'
 import '../styles/AvatarGenerator.css'
 
@@ -26,11 +26,11 @@ const components = {
   mouths: [
     'beard.svg',
     'beard2.svg',
-    'line.svg',
-    'lips.svg',
-    'open_smile.svg',
-    'original.svg',
-    'smile.svg',
+    // 'line.svg',
+    // 'lips.svg',
+    // 'open_smile.svg',
+    // 'original.svg',
+    // 'smile.svg',
   ],
   pets: ['cat.svg', 'dog.svg', 'fish.svg', 'raptor.svg'],
   tops: [
@@ -46,15 +46,6 @@ const components = {
     'smooth.svg',
     'styled.svg',
   ],
-  //   backgrounds: ['solid.svg'],
-  //   bodies: ['necklace.svg'],
-  //   eyebrows: ['round.svg'],
-  //   eyes: ['lashes.svg'],
-  //   glasses: ['plain.svg'],
-  //   head: ['head.svg'],
-  //   mouths: ['lips.svg'],
-  //   pets: ['fish.svg'],
-  //   tops: ['ponytail.svg'],
 }
 
 const getRandomComponent = (type: keyof typeof components) => {
@@ -65,6 +56,34 @@ const getRandomComponent = (type: keyof typeof components) => {
 
 const AvatarGenerator = () => {
   const avatarRef = useRef<HTMLDivElement>(null)
+
+  // Храним сгенерированные компоненты в состоянии
+  const [avatarComponents, setAvatarComponents] = useState({
+    background: '',
+    head: '',
+    eyebrows: '',
+    body: '',
+    glasses: '',
+    mouth: '',
+    top: '',
+    eyes: '',
+    pet: '',
+  })
+
+  useEffect(() => {
+    // Генерируем компоненты при первой загрузке
+    setAvatarComponents({
+      background: getRandomComponent('backgrounds'),
+      head: getRandomComponent('head'),
+      eyebrows: getRandomComponent('eyebrows'),
+      body: getRandomComponent('bodies'),
+      glasses: getRandomComponent('glasses'),
+      mouth: getRandomComponent('mouths'),
+      top: getRandomComponent('tops'),
+      eyes: getRandomComponent('eyes'),
+      pet: getRandomComponent('pets'),
+    })
+  }, [])
 
   const generateAvatar = () => {
     if (avatarRef.current) {
@@ -81,59 +100,66 @@ const AvatarGenerator = () => {
     }
   }
 
+  const getMouthPosition = (mouth: string) => {
+    if (mouth === 'beard2.svg') {
+      return '185px' // Меньше значение для beard2
+    }
+    return '225px' // Обычное значение для других
+  }
+
   return (
     <div>
       <div ref={avatarRef} className="avatar-container">
         <img
-          src={`/src/files/backgrounds/${getRandomComponent('backgrounds')}`}
+          src={`/src/files/backgrounds/${avatarComponents.background}`}
           className="avatar-component"
           style={{ top: '0px' }}
           alt="background"
         />
         <img
-          src={`/src/files/head/${getRandomComponent('head')}`}
+          src={`/src/files/head/${avatarComponents.head}`}
           className="avatar-component"
-          style={{ top: '125px' }}
+          style={{ top: '132px' }}
           alt="head"
         />
         <img
-          src={`/src/files/bodies/${getRandomComponent('bodies')}`}
-          className="avatar-component"
-          style={{ top: '297px' }}
-          alt="body"
-        />
-        <img
-          src={`/src/files/glasses/${getRandomComponent('glasses')}`}
-          className="avatar-component"
-          style={{ top: '194px' }}
-          alt="glasses"
-        />
-        <img
-          src={`/src/files/mouths/${getRandomComponent('mouths')}`}
-          className="avatar-component"
-          style={{ top: '225px' }}
-          alt="mouth"
-        />
-        <img
-          src={`/src/files/tops/${getRandomComponent('tops')}`}
-          className="avatar-component"
-          style={{ top: '58px' }}
-          alt="top"
-        />
-        <img
-          src={`/src/files/eyes/${getRandomComponent('eyes')}`}
-          className="avatar-component"
-          style={{ top: '200px' }}
-          alt="eyes"
-        />
-        <img
-          src={`/src/files/eyebrows/${getRandomComponent('eyebrows')}`}
+          src={`/src/files/eyebrows/${avatarComponents.eyebrows}`}
           className="avatar-component"
           style={{ top: '176px' }}
           alt="eyebrows"
         />
         <img
-          src={`/src/files/pets/${getRandomComponent('pets')}`}
+          src={`/src/files/bodies/${avatarComponents.body}`}
+          className="avatar-component"
+          style={{ top: '297px' }}
+          alt="body"
+        />
+        <img
+          src={`/src/files/mouths/${avatarComponents.mouth}`}
+          className="avatar-component"
+          style={{ top: getMouthPosition(avatarComponents.mouth) }}
+          alt="mouth"
+        />
+        <img
+          src={`/src/files/glasses/${avatarComponents.glasses}`}
+          className="avatar-component"
+          style={{ top: '194px' }}
+          alt="glasses"
+        />
+        <img
+          src={`/src/files/tops/${avatarComponents.top}`}
+          className="avatar-component"
+          style={{ top: '58px' }}
+          alt="top"
+        />
+        <img
+          src={`/src/files/eyes/${avatarComponents.eyes}`}
+          className="avatar-component"
+          style={{ top: '200px' }}
+          alt="eyes"
+        />
+        <img
+          src={`/src/files/pets/${avatarComponents.pet}`}
           className="pet-component"
           alt="pet"
           style={{ top: '312px' }}
