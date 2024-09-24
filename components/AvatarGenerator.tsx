@@ -3,7 +3,7 @@ import { toPng } from 'html-to-image'
 import '../styles/AvatarGenerator.css'
 
 const components = {
-  backgrounds: ['boom.svg', 'bricks.svg', 'solid.svg'],
+  backgrounds: ['boom.svg', 'bricks.svg', 'solid'],
   bodies: [
     'muscle_shirt.svg',
     'necklace.svg',
@@ -26,11 +26,11 @@ const components = {
   mouths: [
     'beard.svg',
     'beard2.svg',
-    // 'line.svg',
-    // 'lips.svg',
-    // 'open_smile.svg',
-    // 'original.svg',
-    // 'smile.svg',
+    'line.svg',
+    'lips.svg',
+    'open_smile.svg',
+    'original.svg',
+    'smile.svg',
   ],
   pets: ['cat.svg', 'dog.svg', 'fish.svg', 'raptor.svg'],
   tops: [
@@ -48,10 +48,17 @@ const components = {
   ],
 }
 
+const solidColors = ['#76EBC8', '#985CFA', '#FC8F8F']
+
 const getRandomComponent = (type: keyof typeof components) => {
   const items = components[type]
   const randomIndex = Math.floor(Math.random() * items.length)
   return items[randomIndex]
+}
+
+const getRandomColor = () => {
+  const randomIndex = Math.floor(Math.random() * solidColors.length)
+  return solidColors[randomIndex]
 }
 
 const AvatarGenerator = () => {
@@ -60,6 +67,7 @@ const AvatarGenerator = () => {
   // Храним сгенерированные компоненты в состоянии
   const [avatarComponents, setAvatarComponents] = useState({
     background: '',
+    backgroundColor: '',
     head: '',
     eyebrows: '',
     body: '',
@@ -71,9 +79,10 @@ const AvatarGenerator = () => {
   })
 
   useEffect(() => {
-    // Генерируем компоненты при первой загрузке
+    const background = getRandomComponent('backgrounds')
     setAvatarComponents({
-      background: getRandomComponent('backgrounds'),
+      background,
+      backgroundColor: background === 'solid' ? getRandomColor() : '',
       head: getRandomComponent('head'),
       eyebrows: getRandomComponent('eyebrows'),
       body: getRandomComponent('bodies'),
@@ -108,14 +117,26 @@ const AvatarGenerator = () => {
   }
 
   return (
-    <div>
+    <div className="avatar-wrapper">
       <div ref={avatarRef} className="avatar-container">
-        <img
-          src={`/src/files/backgrounds/${avatarComponents.background}`}
-          className="avatar-component"
-          style={{ top: '0px' }}
-          alt="background"
-        />
+        {avatarComponents.background === 'solid' ? (
+          <div
+            className="avatar-component"
+            style={{
+              top: '0px',
+              backgroundColor: avatarComponents.backgroundColor,
+              width: '100%',
+              height: '100%',
+            }}
+          />
+        ) : (
+          <img
+            src={`/src/files/backgrounds/${avatarComponents.background}`}
+            className="avatar-component"
+            style={{ top: '0px' }}
+            alt="background"
+          />
+        )}
         <img
           src={`/src/files/head/${avatarComponents.head}`}
           className="avatar-component"
@@ -149,7 +170,7 @@ const AvatarGenerator = () => {
         <img
           src={`/src/files/tops/${avatarComponents.top}`}
           className="avatar-component"
-          style={{ top: '58px' }}
+          style={{ top: '62px' }}
           alt="top"
         />
         <img
@@ -165,7 +186,9 @@ const AvatarGenerator = () => {
           style={{ top: '312px' }}
         />
       </div>
-      <button onClick={generateAvatar}>Сгенерировать аватарку</button>
+      <button style={{ borderRadius: '0' }} onClick={generateAvatar}>
+        Скачать аватарку
+      </button>
     </div>
   )
 }

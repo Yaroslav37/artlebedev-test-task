@@ -3,6 +3,7 @@
     width: 440px;
     height: 440px;
     overflow: hidden;
+    margin: 0 auto;
 }
 
 .avatar-component{
@@ -19,5 +20,10 @@
     height: 84;
     rotate: -20deg;
     left: -60px;
-    top:150px;
 }
+
+.avatar-wrapper {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+  }
